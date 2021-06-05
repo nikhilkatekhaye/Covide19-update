@@ -8,3 +8,4 @@ Library Used :
 2) Coroutines
 3) LifeCycle : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
 4) Chart Library : "com.github.blackfizz:eazegraph:1.2.5l@aar"
+5) MVVM 
