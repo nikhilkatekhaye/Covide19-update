@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Covid-count</string>
+    <string name="label_confirmed">Confirmed</string>
+    <string name="label_recovered">Recovered</string>
+    <string name="label_deceased">Deceased</string>
+    <string name="label_active">Active</string>
+    <string name="label_dummy_data">11111</string>
+    <string name="label_bhandara">Bhandara(M.H.)</string>
+    <string name="label_covid_report">Covid Report</string>
 </resources>

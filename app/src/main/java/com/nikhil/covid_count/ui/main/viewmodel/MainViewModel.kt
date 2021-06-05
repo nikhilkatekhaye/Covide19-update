@@ -6,6 +6,8 @@ import com.nikhil.covid_count.data.repository.MainRepository
 import com.nikhil.covid_count.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
@@ -19,23 +21,37 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     }
 
 
-    suspend fun getBhandaraData() : String {
+    private suspend fun getBhandaraData() : String {
 
-        var response: String = mainRepository.getUsers().byteString().utf8()
+        val response: String = mainRepository.getUsers().byteString().utf8()
 
-        var jsonObject = JSONObject(response)
+        val jsonObject = JSONObject(response)
 
-        var a : String = jsonObject.get("Maharashtra").toString()
+        val a : String = jsonObject.get("Maharashtra").toString()
 
-        var jsonObject1 = JSONObject(a)
+        val jsonObject1 = JSONObject(a)
 
-        var b : String = jsonObject1.get("districtData").toString()
+        val b : String = jsonObject1.get("districtData").toString()
 
 
-        var jsonObject2 = JSONObject(b)
+        val jsonObject2 = JSONObject(b)
 
-        var c : String = jsonObject2.get("Bhandara").toString()
+        val c : String = jsonObject2.get("Bhandara").toString()
 
         return c
+    }
+
+    fun getTodayDate() = liveData(Dispatchers.Main) {
+        try {
+            emit(Resource.success(data = getDate()))
+        } catch(exception : Exception){
+            emit(Resource.error(data = null, message ="Error Occurred!"))
+        }
+    }
+
+    private fun getDate() : String {
+        val c: Date = Calendar.getInstance().time
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        return simpleDateFormat.format(c)
     }
 }
